@@ -1,9 +1,7 @@
-// components/PublicYearSection.tsx
 'use client';
 import { getMoreGoals } from '@/actions/goal';
 import { Goal } from '@/types';
 import { useState } from 'react';
-
 import PublicGoalItem from './PublicList';
 import { Button } from './ui/button';
 
@@ -16,9 +14,10 @@ export default function PublicYearSection({
   year,
   initialGoals,
 }: YearSectionProps) {
-  const [goals, setGoals] = useState(initialGoals);
+  // Only take the first 5 goals from initialGoals
+  const [goals, setGoals] = useState(initialGoals.slice(0, 5));
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(initialGoals.length >= 5);
+  const [hasMore, setHasMore] = useState(initialGoals.length > 5);
 
   const loadMore = async () => {
     setIsLoading(true);
@@ -35,9 +34,9 @@ export default function PublicYearSection({
   };
 
   return (
-    <div className="mx-auto max-w-3xl p-20">
+    <div>
       <h2 className="text-6xl font-bold mb-8">{year}</h2>
-      <div className="space-y-3">
+      <div>
         {goals.map((goal) => (
           <PublicGoalItem key={goal.id} goal={goal} />
         ))}

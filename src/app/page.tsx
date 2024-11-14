@@ -9,7 +9,7 @@ export default async function Home() {
   const allGoals = await getYearlyGoals();
 
   return (
-    <div className="container mx-auto p-4">
+    <div className=" max-w-3xl mx-auto p-4">
       <Suspense fallback={<div>Loading goals...</div>}>
         <div className="space-y-8">
           {Object.entries(allGoals)

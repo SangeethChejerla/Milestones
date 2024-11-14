@@ -1,5 +1,3 @@
-// components/PublicGoalItem.tsx
-'use client';
 import { cn } from '@/lib/utils';
 import { Goal } from '@/types';
 import { Check } from 'lucide-react';
@@ -16,8 +14,11 @@ export default function PublicGoalItem({ goal }: PublicGoalItemProps) {
         <div>
           <p
             className={cn(
-              'font-medium text-3xl',
-              goal.isComplete && 'text-muted-foreground line-through'
+              'font-medium text-3xl transition-all duration-300',
+              goal.isComplete
+                ? 'text-muted-foreground line-through' // Apply line-through if goal is complete
+                : 'text-foreground',
+              'hover:underline hover:text-white' // Prevent line-through on hover
             )}
           >
             {goal.goal}
