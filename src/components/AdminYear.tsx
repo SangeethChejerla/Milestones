@@ -1,22 +1,20 @@
+// components/AdminYearSection.tsx
 'use client';
-import { useState } from 'react';
-
 import { getMoreGoals } from '@/actions/goal';
-import GoalItem from './GoalItem';
+import { Goal } from '@/types';
+import { useState } from 'react';
+import AdminGoalItem from './AdminList';
 import { Button } from './ui/button';
 
-interface Goal {
-  id: number;
-  goal: string;
-  year: number;
-  isComplete: boolean;
-}
 interface YearSectionProps {
   year: number;
   initialGoals: Goal[];
 }
 
-export default function YearSection({ year, initialGoals }: YearSectionProps) {
+export default function AdminYearSection({
+  year,
+  initialGoals,
+}: YearSectionProps) {
   const [goals, setGoals] = useState(initialGoals);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(initialGoals.length >= 5);
@@ -40,13 +38,13 @@ export default function YearSection({ year, initialGoals }: YearSectionProps) {
       <h2 className="text-6xl font-bold mb-8">{year}</h2>
       <div className="space-y-3">
         {goals.map((goal) => (
-          <GoalItem key={goal.id} goal={goal} />
+          <AdminGoalItem key={goal.id} goal={goal} />
         ))}
       </div>
       {hasMore && (
         <Button
           variant="outline"
-          className="w-full"
+          className="w-full mt-4"
           onClick={loadMore}
           disabled={isLoading}
         >

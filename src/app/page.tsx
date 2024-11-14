@@ -1,6 +1,9 @@
+// app/page.tsx (public home page)
 import { getYearlyGoals } from '@/actions/goal';
-import YearSection from '@/components/YearSection';
+import PublicYearSection from '@/components/PublicYear';
 import { Suspense } from 'react';
+
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const allGoals = await getYearlyGoals();
@@ -12,7 +15,7 @@ export default async function Home() {
           {Object.entries(allGoals)
             .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
             .map(([year, goals]) => (
-              <YearSection
+              <PublicYearSection
                 key={year}
                 year={Number(year)}
                 initialGoals={goals}
